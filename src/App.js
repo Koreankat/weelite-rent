@@ -9,10 +9,16 @@ import vektor from "./assets/Vector.png"
 import localisation from "./assets/localisation.png"
 import arrowdown from "./assets/arrowdown.png"
 import ok from "./assets/ok.png"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { FaFireExtinguisher } from "react-icons/fa"
 import { BiTrash } from "react-icons/bi"
-
+import {
+  Textbox,
+  Radiobox,
+  Checkbox,
+  Select,
+  Textarea,
+} from "react-inputs-validation"
 import "./App.css"
 
 function Nav() {
@@ -58,6 +64,14 @@ function Form() {
   const [drop2, setDrop2] = useState(false)
   const [boxe, setBoxe] = useState(3)
   const [choice, setChoice] = useState(1)
+  const [isClicked, setIsClicked] = useState(false)
+  const [input1, setInput1] = useState("")
+  const [input2, setInput2] = useState("")
+  const [input3, setInput3] = useState("")
+  const [input4, setInput4] = useState("")
+  const [input5, setInput5] = useState("")
+  const [input6, setInput6] = useState("")
+  const [input7, setInput7] = useState("")
 
   let round1 = " rounded-xl"
   let round2 = " rounded-xl"
@@ -75,6 +89,7 @@ function Form() {
     round2 -= " rounded-t-xl"
     round2 += " rounded-xl"
   }
+
   return (
     <div className='w-[60%] border-solid border-stone-300 border rounded-3xl overflow-hidden mt-[52px]'>
       <div className=' bg-white p-7'>
@@ -105,35 +120,128 @@ function Form() {
           <div className='flex items-center justify-between mb-4'>
             <div>
               <h1 className=' mb-2'>Numéro</h1>
-              <input className='w-[42px] h-[46px]' />
+              <input
+                className={`w-[50px] h-[46px] ${
+                  isClicked ? (input1.length === 0 ? "bg-red-300" : "") : ""
+                }`}
+                onChange={(e) => {
+                  setInput1(e.target.value)
+                }}
+              />
             </div>
             <div>
-              <h1 className=' mb-2'>Voie</h1>
-              <input className='w-[251px] h-[46px]' />
+              <h1 className=' mb-2'>Voie</h1>{" "}
+              <input
+                className={`w-[251px] h-[46px] ${
+                  isClicked ? (input2.length === 0 ? "bg-red-300" : "") : ""
+                }`}
+                onChange={(e) => {
+                  setInput2(e.target.value)
+                }}
+              />
+              {isClicked ? (
+                input2.length === 0 || input1.length === 0 ? (
+                  <h1 className='absolute right-[435px] top-[840px] text-red-500'>
+                    Veuillez remplir les champ*.{" "}
+                  </h1>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className='mb-4'>
             <h1 className=' mb-2'>Lieu-dit</h1>
-            <input className='w-[201px] h-[46px]' />
+            <input
+              className={`w-[201px] h-[46px] ${
+                isClicked ? (input3.length === 0 ? "bg-red-300" : "") : ""
+              }`}
+              onChange={(e) => {
+                setInput3(e.target.value)
+              }}
+            />
+            {isClicked ? (
+              input3.length === 0 ? (
+                <h1 className='absolute right-[585px] top-[940px] text-red-500'>
+                  Veuillez remplir le champ*.{" "}
+                </h1>
+              ) : (
+                ""
+              )
+            ) : (
+              ""
+            )}
           </div>
           <div className='flex items-center justify-between mb-4'>
             <div>
               <h1 className=' mb-2'>Code Postal</h1>
-              <input className='w-[65px] h-[46px]' />
+              <input
+                className={`w-[65px] h-[46px] ${
+                  isClicked ? (input4.length === 0 ? "bg-red-300" : "") : ""
+                }`}
+                onChange={(e) => {
+                  setInput4(e.target.value)
+                }}
+              />
             </div>
             <div>
               <h1 className=' mb-2'>Localité</h1>
-              <input className='w-[237px] h-[46px]' />
+              <input
+                className={`w-[237px] h-[46px] ${
+                  isClicked ? (input5.length === 0 ? "bg-red-300" : "") : ""
+                }`}
+                onChange={(e) => {
+                  setInput5(e.target.value)
+                }}
+              />
+              {isClicked ? (
+                input5.length === 0 || input4.length === 0 ? (
+                  <h1 className='absolute right-[435px] top-[1030px] text-red-500'>
+                    Veuillez remplir les champ*.{" "}
+                  </h1>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
             </div>
           </div>
           <div className='flex items-center  mb-4'>
             <div className='mr-10'>
               <h1 className=' mb-2'>BP</h1>
-              <input className='w-[65px] h-[46px]' />
+              <input
+                className={`w-[65px] h-[46px] ${
+                  isClicked ? (input6.length === 0 ? "bg-red-300" : "") : ""
+                }`}
+                onChange={(e) => {
+                  setInput6(e.target.value)
+                }}
+              />
             </div>
             <div>
               <h1 className=' mb-2'>Cedex</h1>
-              <input className='w-[70px] h-[46px]]' />
+              <input
+                className={`w-[70px] h-[46px] ${
+                  isClicked ? (input7.length === 0 ? "bg-red-300" : "") : ""
+                }`}
+                onChange={(e) => {
+                  setInput7(e.target.value)
+                }}
+              />
+              {isClicked ? (
+                input7.length === 0 || input6.length === 0 ? (
+                  <h1 className='absolute right-[575px] top-[1130px] text-red-500'>
+                    Veuillez remplir les champ*.{" "}
+                  </h1>
+                ) : (
+                  ""
+                )
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </form>
@@ -326,13 +434,40 @@ function Form() {
             </div>
             <div className='mt-[30px] bg-white w-full flex justify-center items-center h-[100px]'>
               <div className='w-5/6 flex justify-between'>
-                <div className='loader flex flex-col justify-center items-center'>
-                  <h1 className='h1 font-[500] text-[#143656] mr-2'>6</h1>
-                  <h3 className='h1 text-[8px] font-[300] '>étapes</h3>
+                <div className='loader'>
+                  <h1 className='h1 absolute mt-1 ml-3 font-[500] text-[#143656] mr-2'>
+                    6
+                  </h1>
+                  <h3 className='h1 absolute mt-5 ml-4 text-[8px] font-[300] '>
+                    étapes
+                  </h3>
                 </div>
-                <button className='w-[202px] h-[50px] bg-[#192BC2] rounded-xl text-white'>
+                <button
+                  className='w-[202px] h-[50px] bg-[#192BC2] rounded-xl text-white'
+                  type='submit'
+                  onClick={(e) => {
+                    setIsClicked(!isClicked)
+                  }}
+                >
                   Suivant
                 </button>
+                {isClicked ? (
+                  input1.length === 0 ||
+                  input2.length === 0 ||
+                  input3.length === 0 ||
+                  input4.length === 0 ||
+                  input5.length === 0 ||
+                  input6.length === 0 ||
+                  input7.length === 0 ? (
+                    <h1 className='absolute text-red-500 right-[370px] mt-12'>
+                      Fill in the form correctly*
+                    </h1>
+                  ) : (
+                    ""
+                  )
+                ) : (
+                  ""
+                )}
               </div>
             </div>
           </div>
